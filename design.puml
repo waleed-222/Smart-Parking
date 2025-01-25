@@ -1,0 +1,45 @@
+@startuml
+hide empty members
+title Parking System
+interface Input  {
+    +  void listen()
+    +  T get()
+}
+class keyboard {
+    - std::string key
+    +  void listen()
+    +  T get()
+}
+enum Floors {
+    FIRST,
+    SECOND
+}
+
+class Parking {
+    - two_dimensional_array parking_lot
+    - std::array<int, 2> parking_lot_available
+    - Updater updater
+    - Input input
+    + void park()
+    + void unpark()
+}
+interface Display {
+    + void show()
+}
+class Monitor {
+    - std::string message
+    +  void show()
+}
+class Vehicle
+class Updater {
+
+    + void update()
+}
+keyboard -up-|> Input
+Parking .. Floors: Dependency
+Parking - Updater : has a (assossiation)
+Monitor -up-|>Display :hint relization
+Updater -- Display : works with (assossiation)
+Parking -left-Input : has a (assossiation)
+keyboard . Vehicle : Dependency
+@enduml

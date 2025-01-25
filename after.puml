@@ -1,0 +1,90 @@
+@startuml
+
+/' Objects '/
+
+namespace sp {
+	abstract class Display <template<typename T>> {
+		+~Display()
+		+{abstract} show(T msg) : void
+	}
+
+	abstract class Input <template<typename T>> {
+		+~Input()
+		+{abstract} get() : T
+		#{abstract} listen() : void
+		+{abstract} terminate() : void
+	}
+
+	class Monitor {
+		+Monitor()
+		+~Monitor()
+		+show(std::string msg) : void
+	}
+
+	class Parking {
+		+Parking(std::unique_ptr<Input<Key>>& input)
+		+~Parking()
+		-updater : Updater<parking_type>
+		-quit : bool
+		-t1_executer : std::thread
+		-input : std::unique_ptr<Input<Key>>&
+		+close() : void
+		+park(Floors floor) : void
+		+unpark(Floors floor) : void
+	}
+
+	class Updater <template<typename T>> {
+		+Updater()
+		+~Updater()
+		+update(T parkinglot_available) : void
+	}
+
+	class keyboard {
+		+keyboard()
+		+~keyboard()
+		-key : Key
+		-quit : bool
+		+get() : int
+		-key_mutex : std::mutex
+		-t1_listners : std::thread
+		-listen() : void
+		+terminate() : void
+	}
+
+	enum Floors {
+		FIRST
+		NUM_FLOORS
+		SECOND
+	}
+
+	enum Key {
+		LAlt1
+		LAlt2
+		LControl1
+		LControl2
+		NONE
+	}
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+sp.Display <|-- sp.Monitor
+sp.Input <|-- sp.keyboard
+
+/' Assossiation relationships '/
+sp.Parking -left- sp.Input
+sp.Parking .. sp.Floors
+sp.Parking -- sp.Key
+sp.Parking - sp.Updater
+sp.keyboard -- sp.Key
+sp.Updater --sp.Display
+
+/' Nested objects '/
+
+
+
+@enduml

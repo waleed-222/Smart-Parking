@@ -1,4 +1,6 @@
 #include "Keyboard.hpp"
+#include "KeyboardConverter.hpp"
+#include "Monitor.hpp"
 #include "Parking.hpp"
 #include <bits/stdc++.h>
 #include <memory>
@@ -7,7 +9,10 @@ int main() {
   static bool quit = false;
   std::unique_ptr<sp::Input<sp::Key>> keyboard =
       std::make_unique<sp::keyboard>();
-  sp::Parking parking(keyboard);
+  sp::keyboardConverter keyboard_converter;
+  sp::Monitor monitor;
+  sp::Parking<sp::keyboardConverter, sp::Key> parking(keyboard_converter,
+                                                      keyboard, monitor);
 
   signal(SIGINT, [](int signal) {
     quit = true;

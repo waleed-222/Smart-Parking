@@ -10,16 +10,15 @@ author : Moatasem
 date :Sat Jan 25 08:15:21 PM CET 2025
 brief:
 */
+
 namespace sp {
-template <typename T> class Input {
-
-public:
-  using type = T;
-  virtual ~Input() = default;
-  virtual T get() = 0;
-  virtual void terminate() = 0;
-
-protected:
-  virtual void listen() = 0;
+enum Floors { FIRST, SECOND, NUM_FLOORS };
+enum class Actions {
+  PARK_FIRST,
+  PARK_SECOND,
+  UNPARK_FIRST,
+  UNPARK_SECOND,
+  NONE
 };
+
 } // namespace sp

@@ -18,7 +18,6 @@ brief:
 namespace sp {
 enum class Key { LControl1, LControl2, LAlt1, LAlt2, NONE };
 class keyboard : public Input<Key> {
-
 public:
   keyboard() {
     t1_listners = std::thread([this] { this->listen(); });

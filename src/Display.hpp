@@ -1,5 +1,6 @@
 
 #pragma once
+#include <string>
 /********************************************/
 //
 //              CopyRight Moatasem Elsayed
@@ -11,11 +12,11 @@ date :Sat Jan 25 09:35:04 PM CET 2025
 brief:
 */
 namespace sp {
-template <typename T> class Display {
+class Display {
 
 public:
   virtual ~Display() = default;
-  virtual void show(T msg) = 0;
+  virtual void show(std::string msg) = 0;
 
 private:
 };

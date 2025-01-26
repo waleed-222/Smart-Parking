@@ -10,16 +10,13 @@ author : Moatasem
 date :Sat Jan 25 08:15:21 PM CET 2025
 brief:
 */
+#include "Input.hpp"
+#include "Types.hpp"
 namespace sp {
-template <typename T> class Input {
+template <typename T> class Converter {
 
 public:
-  using type = T;
-  virtual ~Input() = default;
-  virtual T get() = 0;
-  virtual void terminate() = 0;
-
-protected:
-  virtual void listen() = 0;
+  virtual ~Converter() = default;
+  virtual Actions convert(typename Input<T>::type data) = 0;
 };
 } // namespace sp

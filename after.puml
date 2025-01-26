@@ -1,11 +1,18 @@
 @startuml
 
+
+
 /' Objects '/
 
 namespace sp {
-	abstract class Display <template<typename T>> {
+	abstract class Converter <template<typename T>> {
+		+~Converter()
+		+{abstract} convert(typename Input<T>::type data) : Actions
+	}
+
+	abstract class Display  {
 		+~Display()
-		+{abstract} show(T msg) : void
+		+{abstract} show(std::string msg) : void
 	}
 
 	abstract class Input <template<typename T>> {
@@ -21,22 +28,24 @@ namespace sp {
 		+show(std::string msg) : void
 	}
 
-	class Parking {
-		+Parking(std::unique_ptr<Input<Key>>& input)
+	class Parking <template<typename T, typename U>> {
+		+Parking(T converter, std::unique_ptr<Input<U>>& input)
 		+~Parking()
+		-converter : T
 		-updater : Updater<parking_type>
 		-quit : bool
 		-t1_executer : std::thread
-		-input : std::unique_ptr<Input<Key>>&
+		-input : std::unique_ptr<Input<U>>&
 		+close() : void
 		+park(Floors floor) : void
 		+unpark(Floors floor) : void
 	}
 
 	class Updater <template<typename T>> {
-		+Updater()
+		+Updater(Display &monitor)
 		+~Updater()
 		+update(T parkinglot_available) : void
+		-Display &monitor;
 	}
 
 	class keyboard {
@@ -51,12 +60,26 @@ namespace sp {
 		+terminate() : void
 	}
 
+	class keyboardConverter {
+		+convert(Key data) : Actions
+	}
+namespace types {
+
+	enum Actions {
+		NONE
+		PARK_FIRST
+		PARK_SECOND
+		UNPARK_FIRST
+		UNPARK_SECOND
+	}
+
 	enum Floors {
 		FIRST
 		NUM_FLOORS
 		SECOND
 	}
 
+}
 	enum Key {
 		LAlt1
 		LAlt2
@@ -72,19 +95,20 @@ namespace sp {
 
 /' Inheritance relationships '/
 
+sp.Converter <|-- sp.keyboardConverter
 sp.Display <|-- sp.Monitor
 sp.Input <|-- sp.keyboard
 
-/' Assossiation relationships '/
-sp.Parking -left- sp.Input
-sp.Parking .. sp.Floors
-sp.Parking -- sp.Key
-sp.Parking - sp.Updater
+
+
+
+
+/' Aggregation relationships '/
+
+sp.Parking -- sp.Input
+sp.Parking -- sp.Updater
 sp.keyboard -- sp.Key
-sp.Updater --sp.Display
-
-/' Nested objects '/
-
-
-
+sp.Updater -- sp.Display
+sp.Parking -- sp.Converter
+sp.Parking - sp.types
 @enduml

@@ -13,7 +13,7 @@ brief:
 #include "Display.hpp"
 #include <string>
 namespace sp {
-class Monitor : public Display<std::string> {
+class Monitor : public Display {
 
 public:
   Monitor();

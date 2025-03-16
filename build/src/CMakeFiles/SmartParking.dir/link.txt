@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/SmartParking.dir/main.cpp.o CMakeFiles/SmartParking.dir/Parking.cpp.o CMakeFiles/SmartParking.dir/Monitor.cpp.o -o SmartParking  -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system 

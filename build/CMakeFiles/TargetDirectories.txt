@@ -1,0 +1,5 @@
+/home/waleed/Desktop/Embedded Linux/07-DesignPattern/0-Tasks/new/Smart-Parking/build/CMakeFiles/edit_cache.dir
+/home/waleed/Desktop/Embedded Linux/07-DesignPattern/0-Tasks/new/Smart-Parking/build/CMakeFiles/rebuild_cache.dir
+/home/waleed/Desktop/Embedded Linux/07-DesignPattern/0-Tasks/new/Smart-Parking/build/src/CMakeFiles/SmartParking.dir
+/home/waleed/Desktop/Embedded Linux/07-DesignPattern/0-Tasks/new/Smart-Parking/build/src/CMakeFiles/edit_cache.dir
+/home/waleed/Desktop/Embedded Linux/07-DesignPattern/0-Tasks/new/Smart-Parking/build/src/CMakeFiles/rebuild_cache.dir

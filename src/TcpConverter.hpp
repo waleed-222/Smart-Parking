@@ -2,29 +2,29 @@
 #pragma once
 /********************************************/
 //
-//              CopyRight Moatasem Elsayed
+//              CopyRight Waleed Ebrahem
 //
 /********************************************/
 /*
-author : Moatasem Elsayed
-date :Sat Jan 25 08:15:06 PM CET 2025
+author : Waleed Ebrahem
+date :Sun Mar 16 07:06:15 PM CET 2025
 brief:
 */
-#include "Keyboard.hpp"
+#include "TCP.hpp"
 #include "Types.hpp"
 #include "converter.hpp"
 namespace sp {
-class keyboardConverter : public Converter<Key> {
+class TcpConverter : public Converter<Key> {
 public:
   Actions convert(Key data) override {
     Actions action = Actions::NONE;
-    if (data == Key::LControl1) {
+    if (data == Key::CarEnter1) {
       action = Actions::PARK_FIRST;
-    } else if (data == Key::LControl2) {
+    } else if (data == Key::CarEnter2) {
       action = Actions::PARK_SECOND;
-    } else if (data == Key::LAlt1) {
+    } else if (data == Key::CarExit1) {
       action = Actions::UNPARK_FIRST;
-    } else if (data == Key::LAlt2) {
+    } else if (data == Key::CarExit2) {
       action = Actions::UNPARK_SECOND;
     } else {
     }

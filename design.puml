@@ -1,45 +1,122 @@
 @startuml
-hide empty members
-title Parking System
-interface Input  {
-    +  void listen()
-    +  T get()
+
+
+
+/' Objects '/
+
+namespace sp {
+	abstract class Converter <template<typename T>> {
+		+~Converter()
+		+{abstract} convert(typename Input<T>::type data) : Actions
+	}
+
+	abstract class Display  {
+		+~Display()
+		+{abstract} show(std::string msg) : void
+	}
+
+	abstract class Input <template<typename T>> {
+		+~Input()
+		+{abstract} get() : T
+		#{abstract} listen() : void
+		+{abstract} terminate() : void
+	}
+
+	class Monitor {
+		+Monitor()
+		+~Monitor()
+		+show(std::string msg) : void
+	}
+
+	class Parking <template<typename T, typename U>> {
+		+Parking(T converter, std::unique_ptr<Input<U>>& input)
+		+~Parking()
+		-converter : T
+		-updater : Updater<parking_type>
+		-quit : bool
+		-t1_executer : std::thread
+		-input : std::unique_ptr<Input<U>>&
+		+close() : void
+		+park(Floors floor) : void
+		+unpark(Floors floor) : void
+	}
+
+	class Updater <template<typename T>> {
+		+Updater(Display &monitor)
+		+~Updater()
+		+update(T parkinglot_available) : void
+		-Display &monitor;
+	}
+
+	class TcpInput {
+		+TcpInput(int port)
+		+~TcpInput()
+		-key : Key
+		-quit : bool
+		+get() : int
+		-mapKey(const std::string& input) : int
+		-serverPort : int
+		-serverSocket : int
+		-serverSocket : int
+		-serverSocket : int
+		-key_mutex : std::mutex
+		-listenerThread : std::thread
+		-listen() : void
+		-setupServer() : void
+		+terminate() : void
+	}
+
+
+	class TcpConverter {
+		+convert(Key data) : Actions
+	}
+namespace types {
+
+	enum Actions {
+		NONE
+		PARK_FIRST
+		PARK_SECOND
+		UNPARK_FIRST
+		UNPARK_SECOND
+	}
+
+	enum Floors {
+		FIRST
+		NUM_FLOORS
+		SECOND
+	}
+
 }
-class keyboard {
-    - std::string key
-    +  void listen()
-    +  T get()
-}
-enum Floors {
-    FIRST,
-    SECOND
+	enum Key {
+		CarEnter1
+		CarEnter2
+		CarExit1
+		CarExit2
+		NONE
+		Quit
+	}
 }
 
-class Parking {
-    - two_dimensional_array parking_lot
-    - std::array<int, 2> parking_lot_available
-    - Updater updater
-    - Input input
-    + void park()
-    + void unpark()
-}
-interface Display {
-    + void show()
-}
-class Monitor {
-    - std::string message
-    +  void show()
-}
-class Vehicle
-class Updater {
 
-    + void update()
-}
-keyboard -up-|> Input
-Parking .. Floors: Dependency
-Parking - Updater : has a (assossiation)
-Monitor -up-|>Display :hint relization
-Updater -- Display : works with (assossiation)
-Parking -left-Input : has a (assossiation)
-keyboard . Vehicle : Dependency
+
+
+
+/' Inheritance relationships '/
+
+sp.Converter <|-- sp.TcpConverter
+sp.Display <|-- sp.Monitor
+sp.Input <|-- sp.TcpInput
+
+
+
+
+
+/' Aggregation relationships '/
+
+sp.Parking -- sp.Input
+sp.Parking -- sp.Updater
+sp.TcpInput -- sp.Key
+sp.Updater -- sp.Display
+sp.Parking -- sp.Converter
+sp.Parking - sp.types
 @enduml

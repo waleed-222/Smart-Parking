@@ -52,7 +52,7 @@ Smart-Parking/
    ./SmartParking
    ```
 
-## 📡 TCP Commands  
+## 📱 TCP Commands  
 | Command     | Description                     |
 |------------|---------------------------------|
 | CarEnter1  | Car enters on Floor 1          |
@@ -61,7 +61,7 @@ Smart-Parking/
 | CarExit2   | Car exits from Floor 2         |
 | Quit       | Shutdown the server            |
 
-## 📜 UML Diagram  
+## 🐜 UML Diagram  
 The system architecture follows **design patterns** for modularity and efficiency.  
 
 ![System UML](design.puml)  
@@ -72,4 +72,6 @@ This project is a **fork of** [Moatasem Elsayed's Smart Parking System](https://
 ## 🧑‍💻 Author  
 Developed & extended by **[Waleed Ebrahem Mohamed](https://www.linkedin.com/in/waleed-ebrahem-46624a1b2/)**  
 
+## 🔗 LinkedIn Post  
+Check out my LinkedIn post about this project: [Smart Parking System - LinkedIn](https://www.linkedin.com/posts/waleed-ebrahem-46624a1b2_smartparking-softwaredevelopment-designpatterns-activity-7307494341894180864-ykgC?utm_source=share&utm_medium=member_desktop&rcm=ACoAADGDgg4BYvv4VfI2y7hoaIYWK1CZDaNLBJI)
 

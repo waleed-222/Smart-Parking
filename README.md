@@ -12,7 +12,6 @@ This project is a **fork** of [Moatasem Elsayed's Smart Parking System](https://
 
 ## 🛠️ Technologies Used  
 - **C++** for backend logic  
-- **Yocto** for embedded integration  
 - **CMake** for build management  
 - **PlantUML** for design visualization  
 - **Socket Programming** for TCP communication  
